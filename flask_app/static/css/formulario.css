@@ -1,0 +1,28 @@
+body {
+    background-color: #28282c;
+    background-image: linear-gradient(to bottom, rgb(218, 124, 155), rgb(93, 13, 167));
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+input[type=text], input[type=email],input[type=tel], 
+input[type=datetime-local], input[type=file], 
+button, textarea, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+  
+.formulario-container {
+    background-color: #28282c;
+    padding: 15px;
+    align-items: center;
+    display: flexbox;
+    height: 50%;
+    max-width: 350px;
+    margin: 0.1% auto;
+}

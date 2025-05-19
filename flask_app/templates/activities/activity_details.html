@@ -1,0 +1,55 @@
+{% extends 'activities/base.html' %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/actividades.css') }}"
+    />
+{% endblock %}
+
+{% block content %}   
+    <table id="actividad-table">
+        <tr>
+            <th>Inicio</th>
+            <th>Término</th>
+            <th>Comuna</th>
+            <th>Región</th>
+            <th>Sector</th>
+            <th>Tema</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>{{ actividad.init_date }}</td>
+            <td>{{ actividad.end_date }}</td>
+            <td>{{ actividad.comuna }}</td>
+            <td>{{ actividad.region }}</td>
+            <td>{{ actividad.sector }}</td>
+            <td>{{ tema }}</td>
+            <td>{{ actividad.descripcion }}</td>
+        </tr>
+    </table>
+    <div id="fotos">
+        <h2>Fotos de la Actividad</h2>
+        {% if actividad.fotos %}
+            {% for foto in actividad.fotos %}
+                <img src="{{ foto }}" alt="Foto de la Actividad" class="activity-image">
+            {% endfor %}
+        {% else %}
+            <p>No hay fotos disponibles para esta actividad.</p>
+        {% endif %}
+    </div>
+    <table id="actividad-table-2">
+        <tr>
+            <th>Nombre Organizador</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Contacto</th>
+        </tr>
+        <tr>
+            <td>{{ actividad.nombre }}</td>
+            <td>{{ actividad.email }}</td>
+            <td>{{ actividad.telefono }}</td>
+            <td>{#{ actividad.contacto }#}</td>
+        </tr>
+    </table>
+{% endblock content %}

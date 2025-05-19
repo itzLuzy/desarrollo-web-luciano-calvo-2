@@ -1,0 +1,88 @@
+{% extends 'activities/base.html' %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/formulario.css') }}"
+    />
+{% endblock %}
+
+{% block content %}
+<div class="formulario-container">
+    <form class="formulario" id="activity-form" action="{{url_for('post_activity')}}" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="region-select">Región de la Actividad:</label>
+            <select id="region-select" name="region" onchange="updateComunas(this);" onload="resetSelect(this);">
+            <option value="">--Elige una opción--</option>
+            {% for region in regiones %}
+                <option value="{{ region.id }}">{{ region.nombre }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="comuna-select">Comuna de la Actividad:</label>
+            <select id="comuna-select" name="comuna">
+            <option value="">--Elige una opción--</option>
+            </select>
+        </div>
+        <div id="sector-input" class="grupo-input">
+            <label for="sector">Sector (opcional)</label>
+            <input id="sector" name="sector" type="text" maxlength="100">
+        </div>
+        <div id="name-input" class="grupo-input">
+            <label for="name">Ingresa tu Nombre</label>
+            <input id="username" name="name" type="text" maxlength="200" required>
+        </div>
+        <div id="mail-input" class="grupo-input">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+        </div>
+        <div id="telefono-input" class="grupo-input">
+            <label for="telefono">Teléfono (opcional)</label>
+            <input id="telefono" name="telefono" type="tel">
+        </div>
+        <div id="contact-input" class="grupo-input">
+            <label for="contacto">Medio(s) de Contacto: </label><br>
+            {% for method in contact_methods %}
+                <input type="checkbox" name="{{method}}" onclick="displayTextboxOnCheck(this);"> {{method}}
+                <input id="{{method}}" type="text" name="{{method}}_id" style="display:none;" minlength="4" maxlength="50"> <br>
+            {% endfor %}
+        </div>
+        <div id="inicio-input" class="grupo-input">
+            <label for="inicio">Fecha y Hora de Inicio</label>
+            <input id="inicio" name="inicio" type="datetime-local" required>
+        </div>
+        <div id="termino-input" class="grupo-input">
+            <label for="termino">Fecha y Hora de Término</label>
+            <input id="termino" name="termino" type="datetime-local">
+        </div>
+        <div id="descripcion-input" class="grupo-input">
+            <label for="descripcion">Descripción</label><br>
+            <textarea name="descripcion" id="descripcion-text" cols="50" rows="10" required></textarea>
+        </div>
+        <div id="tema-input" class="grupo-input">
+            <label for="tema">Tema</label>
+            <select id="tema-select" name="tema" onchange="displayTextboxOnOtro(this, 'tema-input')" required>
+            <option value="">--Elige una opción--</option>
+            {% for tema in temas %}
+                <option value="{{tema}}"> {{tema}} </option>
+            {% endfor %}
+            </select>
+        </div>
+        <div id="foto-input" class="grupo-input">
+            <label for="foto">Foto(s)</label>
+            <input id="foto" name="foto" type="file" accept="image/png, image/jpg, image/gif, image/jpeg">
+        </div>
+        <button type="submit" id="envio">Registrar</button>
+      </form>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+    <script lang="javascript" src="{{ url_for('static', filename='js/formulario.js') }}"> </script>
+    <script>
+        window.addEventListener('load', function () {
+            document.getElementById('activity-form').reset();
+        });
+    </script>
+{% endblock %}

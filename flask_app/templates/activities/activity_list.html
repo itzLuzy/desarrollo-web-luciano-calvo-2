@@ -1,0 +1,56 @@
+{% extends 'activities/base.html' %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/actividades.css') }}"
+    />
+{% endblock %}
+
+{% block content %}    
+<!-- activities -->
+{% if data %}
+        <table id="actividad-table">
+            <tr>
+                <th>Inicio</th>
+                <th>Término</th>
+                <th>Comuna</th>
+                <th>Sector</th>
+                <th>Tema</th>
+                <th>Nombre Organizador</th>
+                <th>Total Fotos</th>
+            </tr>
+            {% for act in data %}
+            <tr class="clickable-row" data-href="{{ url_for('activity', activity_id=act.id) }}">
+                <td>{{ act.init_date }}</td>
+                <td>{{ act.end_date }}</td>
+                <td>{{ act.comuna }}</td>
+                <td>{{ act.sector }}</td>
+                <td>{{ act.tema }}</td>
+                <td>{{ act.nombre }}</td>
+                <td>{{ act.total_fotos }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+{% endif %}
+    <div class="paginacion">
+        {% if page > 1 %}
+            <a href="{{ url_for('activity_list', page=page-1) }}">Anterior</a>
+        {% endif %}
+        Página {{ page }} de {{ total_pages }}
+        {% if page < total_pages %}
+            <a href="{{ url_for('activity_list', page=page+1) }}">Siguiente</a>
+        {% endif %}
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll(".clickable-row");
+            rows.forEach(function(row) {
+                row.addEventListener("click", function() {
+                    window.location = row.getAttribute("data-href");
+                });
+                row.style.cursor = "pointer";
+            });
+        });
+    </script>
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'activities/base.html' %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/actividades.css') }}"
+    />
+{% endblock %}
+
+{% block content %}    
+<!-- activities -->
+{% if data %}
+    <table id = "actividades">
+        <tr>
+            <th>Inicio</th>
+            <th>Término</th>
+            <th>Comuna</th>
+            <th>Sector</th>
+            <th>Tema</th>
+            <th>Foto</th>
+        </tr>
+        {% for act in data%}
+        <tr>
+            <td>{{ act.init_date }}</td>
+            <td>{{ act.end_date }}</td>
+            <td>{{ act.comuna }}</td>
+            <td>{{ act.sector }}</td>
+            <td>{{ act.description }}</td>
+            <td><picture><img src="{{ act.photo }}" alt="Activity Photo" height="150" width="150" class="activity-image"></picture></td>
+        </tr>
+        {% endfor%}
+    </table> 
+{% endif %}
+{% endblock content %}

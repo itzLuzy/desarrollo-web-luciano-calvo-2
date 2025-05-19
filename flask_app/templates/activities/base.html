@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <img
+        id="logo-id"
+        src="{{ url_for('static', filename='svg/anonymous.svg') }}"
+        alt="Logo de Confesiones 851"
+      />
+      <h1>Actividades!</h1>
+      <a class="navbar-page" href="{{ url_for('index') }}">Home</a>
+      <a class="navbar-page" href="{{ url_for('activity_list') }}">Lista de Avtividades</a>
+      <a class="navbar-page" href="{{ url_for('inform_activity') }}">Informar Actividad</a>
+      <a class="navbar-page" href="{{ url_for('stats') }}">Stats</a>
+    </div>
+  </body>
+  <section class="main-container">
+    {% block content %}{% endblock %}
+    {% block javascript %}{% endblock %}
+  </section>
+</html>
